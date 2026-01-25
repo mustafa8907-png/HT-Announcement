@@ -1,0 +1,34 @@
+name: Build HT-Announcement
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java-version: [8, 17, 21]
+
+    steps:
+      - name: Kodlari Cek
+        uses: actions/checkout@v3
+
+      - name: JDK ${{ matrix.java-version }} Kurulumu
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ matrix.java-version }}
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Maven ile Derle (Target Java ${{ matrix.java-version }})
+        run: mvn -B package --file pom.xml -Dmaven.compiler.source=${{ matrix.java-version }} -Dmaven.compiler.target=${{ matrix.java-version }}
+
+      - name: Dosya Isimlendirme
+        run: |
+          mv target/HT-Announcement-1.0.0.jar target/HT-Announcement-Java${{ matrix.java-version }}.jar
+        
+      - name: Artifact Yukle
+        uses: actions/upload-artifact@v3
+        with:
+          name: HT-Announcement-Java${{ matrix.java-version }}
+          path: target/HT-Announcement-Java${{ matrix.java-version }}.jar
