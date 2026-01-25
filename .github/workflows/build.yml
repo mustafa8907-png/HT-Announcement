@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Kodlari Cek
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4  # v3 -> v4 olarak güncellendi
 
       - name: JDK ${{ matrix.java-version }} Kurulumu
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4 # v3 -> v4 olarak güncellendi
         with:
           java-version: ${{ matrix.java-version }}
           distribution: 'temurin'
@@ -28,7 +28,7 @@ jobs:
           mv target/HT-Announcement-1.0.0.jar target/HT-Announcement-Java${{ matrix.java-version }}.jar
         
       - name: Artifact Yukle
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4 # HATA BURADAYDI: v3 -> v4 yapıldı.
         with:
           name: HT-Announcement-Java${{ matrix.java-version }}
           path: target/HT-Announcement-Java${{ matrix.java-version }}.jar
