@@ -1,0 +1,8 @@
+message:
+  - "&8&m------------------------"
+  - "<gradient:#ff0000:#ffff00>MARKET FIYATLARI GUNCELLENDI!</gradient>"
+  - "&7Detaylar icin &e/warp market &7adresine git."
+  - "&8&m------------------------"
+delay: 10m
+sound: ENTITY_PLAYER_LEVELUP
+display_mode: CHAT
